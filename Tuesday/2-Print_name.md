@@ -20,13 +20,11 @@ FinAlgoritmo
 
 #### My name in terminal 
 
-![](/home/white/github/core-code-from-scratch-readme/Tuesday/img/myName-terminal.png)
+![](./img/myName-terminal.png)
 
 ### 2 - Print My name and Age
 
-
-
-
+![](./img/printName.png)
 
 
 

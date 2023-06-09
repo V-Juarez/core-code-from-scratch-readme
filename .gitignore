@@ -1,3 +1,7 @@
+.obsidian/
+.DS_Store
+Tuesday/.DS_Store
+
 # Logs
 logs
 *.log
