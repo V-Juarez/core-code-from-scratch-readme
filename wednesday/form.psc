@@ -11,11 +11,10 @@ Algoritmo form
 	Leer address
 	
 	Escribir "=============== Data User  | Form ============="
-	Escribir "==== First Name: " + name
-	Escribir "==== Last Name: " + " " + last
-	Escribir "==== Age: " + "       " + age
-	Escribir "==== Email: " + "     " + email
-	Escribir "==== Address: " + "   " + address
+	Escribir "==== First Name: " + name 
+	Escribir "==== Last Name: " + " " + last 
+	Escribir "==== Age: " + "       " + age 
+	Escribir "==== Email: " + "     " + email 
+	Escribir "==== Address: " + "   " + address 
 	Escribir "=============== End Form ======================"
-	
 FinAlgoritmo
