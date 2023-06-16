@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppThree } from "./src/components/AppThree.jsx";
+import { AppThree } from "./components/AppThree.jsx";
 
 function App() {
   return (
