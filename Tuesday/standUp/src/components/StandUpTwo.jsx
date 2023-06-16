@@ -40,6 +40,8 @@ export const StandUpTwo = () => {
         // function anidado
         const handlerDelete = () => {
           console.log(user.id);
+          const nuevaLista = listUsers.filter((item) => item.id !== user.id)
+          setListUsers(nuevaLista)
         }
         return <User 
           key={index} 
