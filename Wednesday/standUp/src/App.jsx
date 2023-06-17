@@ -6,14 +6,29 @@ import './App.css'
 
 function App() {
   const [render, setRender] = useState(false)
+  const [list, setList] = useState([])
 
   const cambio = () => {
     setRender(!render)
   }
   return (
     <>
-      {render && <StandUp />}
+      <img src={viteLogo} />
+      <img src={reactLogo} />
+
+      {render && <StandUp setList={setList}/>}
       <button onClick={cambio}>{render?"ocultar - ":"mostrar"}</button>
+
+      {list.map((user) => {
+        return (
+          <div key={user.id}>
+            <h2>{user.first_name}</h2>
+            <h3>{user.last_name}</h3>
+            <img src={user.avatar} />
+            <p>{user.email}</p>
+          </div>
+        )
+      })}
     </>
   )
 }
