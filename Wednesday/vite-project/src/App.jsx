@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import CodeSession from './components/CodeSession'
+import Ejercicio from './components/Ejercicio'
 import './App.css'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <>
     {render && <CodeSession />}
     <button onClick={cambio}>Cambio</button>
+    <Ejercicio />
     </>
   )
 }
