@@ -1,55 +1,58 @@
 const express = require('express')
-const margan = require('morgan')
-const server = express()
+const morgan = require('morgan')
+const app = express()
 
-server.use(express.json())
-server.use(margan('dev'))
-// server.use((req, res, next) => {
-//   console.log('log1');
-//   res.status(200).send('Hello World')
-//   next()
-// })
+app.use(express.json())
+app.use(morgan('dev'))
 
-// server.use('/index', (req, res, next) => {
-//   console.log('log2');
-//   // res.status(200).send('Hello World log2')
-// })
-// server.use((req, res, next) => {
-//   console.log('log3');
-//   next()
-// })
-// server.use((req, res, next) => {
-//   console.log('log4');
-//   next()
-// })
+// middleWare
+/*
+app.use((request, response, next) => {
+  console.log('Log1');
+  // response.status(200).send('hello World')
+  next()
+})
 
-const middled = (req, res, next) => {
-  console.log('log1 middle');
-  const body = req.body
-  console.log('body');
+app.use((request, response, next) => {
+  console.log('Log2');
+  response.status(200).send('Hello admin')
+  next()
+})
+
+app.use((request, response, next) => {
+  console.log('Log3');
+})
+*/
+
+const middle1 = (request, response, next) => {
+  console.log('log1');
+  const body = request.body
+  console.log(body);
   next()
 }
 
-const middled1 = (req, res, next) => {
-  console.log('log1 middle2');
+const middle2 = (request, response, next) => {
+  console.log('log2');
+  next()
+}
+const middle3 = (request, response, next) => {
+  console.log('log3');
+  next()
+}
+const middle4 = (request, response, next) => {
+  console.log('log4');
+  response.status(200).send(
+    'This is the last middleware'
+  )
   next()
 }
 
+app.get('/', middle1, middle2, middle3, middle4)
+app.post('/', middle1, middle2, middle3, middle4)
+// app.post(middle2)
+// // app.use(middle3)
+// // app.use(middle4)
 
-const middled2 = (req, res, next) => {
-  console.log('log2 middle2');
-  next()
-}
-const middled3 = (req, res, next) => {
-  console.log('log3 middle3');
-}
-
-server.get('/index', middled)
-server.post('/ps', middled1)
-server.use(middled2)
-server.use(middled3)
-
-
-server.listen(4000, () => {
+app.listen(4000, () => {
   console.log('Server start 4000');
 })
