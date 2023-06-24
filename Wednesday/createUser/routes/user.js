@@ -3,12 +3,13 @@ const { Router } = require("express");
 
 const router = Router();
 const { users } = require("./../db/array");
+const validatorData = require('../middlewares/validatorData')
 
 router.get("/", (request, response, next) => {
   response.status(200).json({ message: "lista de usuarios", data: users });
 });
 
-router.post("/", (request, response, next) => {
+router.post("/", validatorData, (request, response, next) => {
   try {
     const { name, age } = request.body;
     const id = users.length + 1;
