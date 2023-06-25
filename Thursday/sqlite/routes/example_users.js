@@ -1,10 +1,19 @@
 const { Router } = require("express");
 const router = Router();
-const { users } = require("./../db/array");
+const { users } = require("./../services/array");
+const { get } = require('./../services/db')
 const validatorData = require("./../middlewares/validatorData");
 
-router.get("/", (request, response, next) => {
-  response.status(200).json({ message: "lista de usuarios", data: users });
+router.get("/", async (request, response, next) => {
+  try {
+    const listUsers = await get("SELECT * FROM users", []);
+
+    response
+      .status(200)
+      .json({ message: "lista de usuarios", data: listUsers });
+  } catch (error) {
+    response.status(500).json({ message: "Hay un error de servidor" });
+  }
 });
 
 router.post("/", validatorData, (request, response, next) => {
@@ -23,9 +32,9 @@ router.post("/", validatorData, (request, response, next) => {
   }
 });
 
-router.put("/",validatorData, (request, response, next) => {
+router.put("/", validatorData, (request, response, next) => {
   const { id, name, age } = request.body;
-  const userSelect = users.filter((user) => user.id === id);//[{}]
+  const userSelect = users.filter((user) => user.id === id); //[{}]
   if (userSelect.length === 0) {
     return response
       .status(200)
