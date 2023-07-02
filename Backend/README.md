@@ -1,6 +1,4 @@
-# Task App CRUD nodejs and Sqlite3 
-
-
+# Task App CRUD nodejs and Sqlite3 <img align="center" alt="Rafa-NodeJs" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">
 
 Node version:
 
@@ -15,6 +13,18 @@ Clone project
 git clone https://github.com/V-Juarez/core-code-from-scratch-readme.git
 ```
 
-Complete Setup project 🎉 
+Install `Dependencies`
+
+```sh
+npm install express cors sqlite3 morgan dotenv
+```
+
+Install `DevDependencies`
+
+```sh
+npm install nodemon -D
+```
+
+Complete Setup project 🎉
 
 Enjoy create project
