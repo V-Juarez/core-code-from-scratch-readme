@@ -7,7 +7,25 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "keywords": ["Node", "Express", "Backend", "sqilte3", "JavaScript", "React", "TodoApp"],
+  "keywords": [
+    "Node",
+    "Express",
+    "Backend",
+    "sqilte3",
+    "JavaScript",
+    "React",
+    "TodoApp"
+  ],
   "author": "Victoriano Juarez",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
