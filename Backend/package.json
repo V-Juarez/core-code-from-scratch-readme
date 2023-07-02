@@ -1,0 +1,13 @@
+{
+  "name": "TodoApp-CoreCode",
+  "version": "1.0.0",
+  "description": "App an organization task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": ["Node", "Express", "Backend", "sqilte3", "JavaScript", "React", "TodoApp"],
+  "author": "Victoriano Juarez",
+  "license": "MIT"
+}
