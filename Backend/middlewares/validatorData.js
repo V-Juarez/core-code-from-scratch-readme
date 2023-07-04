@@ -1,7 +1,5 @@
-const { response } = require("express")
-
 const validatorData = (req, res, next) => {
-  if (req.body.title === undefined || req.body.description === undefined ||req.body.state === undefined){
+  if (req.body.title === undefined || req.body.description === undefined){
     return res.status(400).json({ message: 'Faltan datos'})
   }
 
@@ -15,7 +13,6 @@ const validatorData = (req, res, next) => {
 
   console.log('Aqui')
   next()
-  console.log(Date())
 }
 
 module.exports = validatorData
