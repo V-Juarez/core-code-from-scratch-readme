@@ -20,8 +20,10 @@ app.use((req, res, next) => {
 app.use('/api', routes)
 
 try {
-
+  initDB()
+  app.listen(config.server_port, () => {
+    console.log(`Server listen port ${config.server_port}`);
+  })
+} catch (error) {
+  console.log(error);
 }
-app.listen(config.server_port, () => {
-  console.log(`Server listen port ${config.server_port}`);
-})
