@@ -17,6 +17,16 @@ const get = (query, params = []) => {
   })
 }
 
+const initDB = async () => {
+  try {
+    await db.run('CREATE TABLE IF NOT EXISTS tasks(id INTERGER PRIMARY KEY, title TEXT, description INTERGER)')
+    console.log('Tabla tasks Cargadas');
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   get,
+  initDB
 }
