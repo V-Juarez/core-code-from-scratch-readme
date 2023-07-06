@@ -1,13 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
-
+// const cors = require(`cors`)
 // .env
 const config = require('./config/index')
+const { initDB } = require('./services/db')
 
 // router task
-const routes = require('./routes/index')
-
 const app = express()
+const routes = require('./routes/index')
 
 app.use(express.json())
 app.use(morgan('dev'))
@@ -19,6 +19,11 @@ app.use((req, res, next) => {
 
 app.use('/api', routes)
 
-app.listen(config.server_port, () => {
-  console.log(`Server listen port ${config.server_port}`);
-})
+try {
+  initDB()
+  app.listen(config.server_port, () => {
+    console.log(`Server listen port ${config.server_port}`);
+  })
+} catch (error) {
+  console.log(error);
+}
