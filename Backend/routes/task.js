@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
         created_at: moment(toDo.created_at).format("YYYY-MM-DD")
       }
     })
-    res.status(200).json({ message: "Lista de usuarios", data })
+    res.status(200).json({ message: "Lista de tareas", data })
   } catch (error) {
     console.log(error);
   }
