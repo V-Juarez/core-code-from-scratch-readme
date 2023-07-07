@@ -9,7 +9,7 @@ const get = (query, params = []) => {
   return new Promise((res, rej) => {
     db.all(query, params, (err, rows) => {
       if (err) {
-        console.log(err);
+        console.error(err);
         return rej(err)
       }
       res(rows)
