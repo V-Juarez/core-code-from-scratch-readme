@@ -71,8 +71,6 @@ router.patch('/:id', async (req, res, next) => {
         .json({ message: `el ID no se encuentra en la db`})
     }
 
-    console.log(toDo);
-
     let { title, description, isdone, created_at } = req.body
 
     if (typeof description == 'undefined') {
@@ -84,22 +82,20 @@ router.patch('/:id', async (req, res, next) => {
     if (typeof isdone == 'undefined') {
       isdone = toDo[0].isdone
     }
-
     if (typeof created_at == 'undefined') {
       created_at = toDo[0].created_at
     }
 
     const isDoneNumber = Number(isdone)
-    await run(`UPDATE tasks SET title = ?, description = ?, isdone = ?, created_at = ?`, [title, description, created_at, isDoneNumber, id, ])
+    await run(`UPDATE tasks SET title = ?, description = ?, isdone = ?, created_at = ? WHERE id = ?`, [title, description, isDoneNumber, created_at, id, ])
 
     const updateTask = {
-      id: data.lastID,
+      id: toDo[0].id,
       title,
       description,
       isdone: false,
       created_at: moment(created_at).format("YYYY-MM-DD")
     }
-    console.log(isDoneNumber);
 
     res.status(200).json({
       message: `To-do updated succesfully`,
