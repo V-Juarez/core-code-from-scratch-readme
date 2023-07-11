@@ -1,18 +1,18 @@
 const sqlite3 = require('sqlite3')
 const path = require('path')
 
-const dbPath = path.resolve(process.cwd(), 'db', 'tasking.sqlite')
+const dbPath = path.resolve(process.cwd(), "src", "db", "tasking.sqlite");
 
 const db = new sqlite3.Database(dbPath)
 
 // post
 const run = (query, params = []) => {
-  return new Promise((res, rej) => {
+  return new Promise((resolve, reject) => {
     db.run(query, params, function (error) {
       if (error) {
-        return rej(error)
+        return reject(error)
       }
-      return res({
+      return resolve({
         status: true,
         lastID: this.lastID,
         changes: this.changes
@@ -22,28 +22,32 @@ const run = (query, params = []) => {
 }
 
 const get = (query, params = []) => {
-  return new Promise((res, rej) => {
+  return new Promise((resolve, reject) => {
     db.all(query, params, (err, rows) => {
       if (err) {
         console.error(err);
-        return rej(err)
+        return reject(err)
       }
-      res(rows)
+      return resolve(rows)
     })
   })
 }
 
 const initDB = async () => {
   try {
-    await run(`CREATE TABLE IF NOT EXISTS tasks(
-      id INTERGER PRIMARY KEY, 
+    await run(
+      `CREATE TABLE IF NOT EXISTS tasks (
+      id INTEGER PRIMARY KEY, 
       title TEXT, 
       description TEXT, 
-      isdone BOOLEAN, 
-      created_at DATETIME DEFAULT 0,
-      CURRENT_TIMESTAMP NOT NULL)`)
+      isdone INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )`
+    )
     console.log('Tabla tasks Cargadas');
   } catch (error) {
+//  DATETIME DEFAULT (strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime'))
+      // created_at DATE DEFAULT (DATE('now'))
     // throw new Error(error)
     console.log(error);
   }
