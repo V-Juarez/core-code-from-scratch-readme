@@ -29,6 +29,7 @@ router.get("/", async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { title, description, isdone, created_at } = req.body
+
     const data = await run(
       "INSERT INTO tasks (title, description, isdone, created_at) VALUES (?, ?, ?, ?)", 
       [title, description, isdone, created_at]
@@ -63,7 +64,7 @@ router.post('/', async (req, res, next) => {
 router.patch('/:id', async (req, res, next) => {
   try {
     const { id } = req.params
-    console.log(id);
+
     const toDo = await get("SELECT * FROM tasks WHERE id = ?", [id])
     if (toDo.length === 0) {
       return res
@@ -108,7 +109,7 @@ router.patch('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', validatorData, async (req, res, next) => {
   try {
     const { id } = req.params
     const toDo = await get("SELECT * FROM tasks WHERE id = ?", [id])
