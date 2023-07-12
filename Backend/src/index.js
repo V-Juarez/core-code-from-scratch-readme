@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-// const cors = require(`cors`)
+const cors = require(`cors`)
 // .env
 const config = require('./config/index')
 const { initDB } = require('./services/db')
@@ -9,6 +9,7 @@ const { initDB } = require('./services/db')
 const app = express()
 const routes = require('./routes/index')
 
+app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
