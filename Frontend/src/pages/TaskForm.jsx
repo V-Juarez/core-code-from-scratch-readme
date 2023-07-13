@@ -1,36 +1,28 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
 
 function TaskForm() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [isdone, setIsdone] = useState(false)
+  const [isDone, setIsDone] = useState(null)
   const [created_at, setCreated_at] = useState('')
 
   const handleSubmite = async (e) => {
     e.preventDefault()
     console.log(title, description);
-
-    // const res = await fetch('http://localhost:4000/api/tasks', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     title,
-    //     description
-    //   }),
-    //   headers: {
-    //     'Content-type': 'application/json'
-    //   }
-    // })
-
     // conect api
     const res = await axios.post('http://localhost:4000/api/task', {
       title,
       description,
-      isdone,
+      isDone,
       created_at
     })
     console.log(res);
     e.target.reset()
+  }
+
+  const handleCheckboxChange = (event) => {
+    setIsDone(event.target.checked || null)
   }
 
   return (
@@ -41,6 +33,7 @@ function TaskForm() {
           placeholder="title" 
           className="block py-2 px-3 mb-4 w-full text-black"
           onChange={(e) => setTitle(e.target.value)}
+          autoFocus
         />
         <textarea 
           placeholder="description" 
@@ -49,10 +42,11 @@ function TaskForm() {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         <input
-          type="text"
-          placeholder="false"
-          className="block py-2 px-3 mb-4 w-full text-black"
-          onChange={(e) => setCreated_at(e.target.value)} 
+          type="checkbox"
+          id="isDone"
+          name="isDone"
+          checked={isDone}
+          onChange={handleCheckboxChange}
         />
         <input
           type="date"
