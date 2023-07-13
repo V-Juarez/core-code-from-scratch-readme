@@ -8,6 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Homepage /> } />
+        <Route path='/tasks/:id' element={<TaskForm /> } />
         <Route path='/tasks/new' element={<TaskForm /> } />
       </Routes>
     </BrowserRouter>
