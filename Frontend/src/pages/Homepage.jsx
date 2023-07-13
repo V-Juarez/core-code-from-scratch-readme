@@ -9,7 +9,6 @@ function Homepage() {
   useEffect(() => {
     async function fetchTasks() {
       const res = await axios.get("http://localhost:4000/api/task")
-      console.log(res);
       setTasks(res.data.data)
     }
     fetchTasks()

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from 'axios'
 
 function TaskForm() {
@@ -6,6 +7,8 @@ function TaskForm() {
   const [description, setDescription] = useState('')
   const [isDone, setIsDone] = useState(null)
   const [created_at, setCreated_at] = useState('')
+
+  const params = useParams()  
 
   const handleSubmite = async (e) => {
     e.preventDefault()
@@ -24,6 +27,25 @@ function TaskForm() {
   const handleCheckboxChange = (event) => {
     setIsDone(event.target.checked || null)
   }
+
+  useEffect(() => {
+    if (isDone === null) {
+      setIsDone(false)
+    }
+
+    if (params.id) {
+      fetchTask()
+    }
+
+    async function fetchTask() {
+      const res = await axios.get(`http://localhost:4000/api/task/${params.id}`)
+      console.log(res.data.data);
+      setTitle(res.data.title)
+      setDescription(res.data.description)
+      setIsDone(res.data.isDone)
+      setCreated_at(res.data.created_at)
+    }
+  }, [])
 
   return (
     <div className="flex item-center justify-center h-[calc(100vh-10rem)]">
@@ -54,7 +76,9 @@ function TaskForm() {
           className="block py-2 px-3 mb-4 w-full text-black"
           onChange={(e) => setCreated_at(e.target.value)} 
         />
-        <button>save</button>
+        <button>
+          {params.id ? "Update Task" : "Create Task"}
+        </button>
       </form>
     </div>
   );
