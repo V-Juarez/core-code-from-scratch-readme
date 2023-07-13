@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 function TaskForm() {
@@ -8,19 +8,35 @@ function TaskForm() {
   const [isDone, setIsDone] = useState(null)
   const [created_at, setCreated_at] = useState('')
 
-  const params = useParams()  
+  const params = useParams()
+  const navigate = useNavigate()
 
+  // conect api
   const handleSubmite = async (e) => {
     e.preventDefault()
-    console.log(title, description);
-    // conect api
-    const res = await axios.post('http://localhost:4000/api/task', {
-      title,
-      description,
-      isDone,
-      created_at
-    })
-    console.log(res);
+
+    try {      
+      if (!params.id) {
+        const res = await axios.post('http://localhost:4000/api/task', {
+          title,
+          description,
+          isDone,
+          created_at
+        })
+        console.log(res);
+      } else {
+        const res = await axios.patch(`http://localhost:4000/api/task/${params.id}`, {
+          title,
+          description,
+          isDone,
+          created_at
+        })
+        console.log(res);
+      }
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+    }
     e.target.reset()
   }
 
@@ -29,24 +45,24 @@ function TaskForm() {
   }
 
   useEffect(() => {
-    if (isDone === null) {
-      setIsDone(false)
-    }
-
     if (params.id) {
       fetchTask()
     }
 
     async function fetchTask() {
-      const res = await axios.get(`http://localhost:4000/api/task/${params.id}`)
-      console.log(res.data.data);
-      setTitle(res.data.title)
-      setDescription(res.data.description)
-      setIsDone(res.data.isDone)
-      setCreated_at(res.data.created_at)
+      try {
+        const res = await axios.get(`http://localhost:4000/api/task/${params.id}`);
+        console.log(res);
+        setTitle(res.data.title)
+        setDescription(res.data.description)
+        setIsDone(res.data.isDone)
+        setCreated_at(res.data.created_at)
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, [])
-
+  }, [params.id])
+  
   return (
     <div className="flex item-center justify-center h-[calc(100vh-10rem)]">
       <form className="bg-zinc-950 p-10" onSubmit={handleSubmite}>
@@ -55,16 +71,19 @@ function TaskForm() {
           placeholder="title" 
           className="block py-2 px-3 mb-4 w-full text-black"
           onChange={(e) => setTitle(e.target.value)}
+          value={title}
           autoFocus
         />
         <textarea 
           placeholder="description" 
+          value={description}
           rows={5}
           className="block py-2 px-3 mb-4 w-full text-black"
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         <input
           type="checkbox"
+          value={isDone}
           id="isDone"
           name="isDone"
           checked={isDone}
@@ -72,6 +91,7 @@ function TaskForm() {
         />
         <input
           type="date"
+          value={created_at}
           placeholder="date"
           className="block py-2 px-3 mb-4 w-full text-black"
           onChange={(e) => setCreated_at(e.target.value)} 
