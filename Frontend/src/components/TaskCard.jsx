@@ -16,7 +16,7 @@ function TaskCard({ task }) {
           onClick={async (e) => {
             e.stopPropagation();
             const res = await updateTask(task.id, {
-              completed: !task.completed,
+              completed: !task.isDone,
             });
             if (res.status === 200) {
               window.location.reload()
@@ -24,7 +24,7 @@ function TaskCard({ task }) {
           }}
         >
           <svg
-            className={`w-6 h-6 ${task.completed ? "text-green-900" : ""}`}
+            className={`w-6 h-6 ${task.isDone ? "text-green-600" : ""}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"

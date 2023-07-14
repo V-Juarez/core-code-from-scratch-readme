@@ -80,14 +80,6 @@ function TaskForm() {
             className="block py-2 px-3 mb-4 w-full text-black"
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
-          {/* <input
-            type="checkbox"
-            value={isDone}
-            id="isDone"
-            name="isDone"
-            checked={isDone}
-            onChange={handleCheckboxChange}
-          /> */}
           <input
             type="date"
             value={created_at}
