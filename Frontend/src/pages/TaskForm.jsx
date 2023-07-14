@@ -72,6 +72,11 @@ function TaskForm() {
     <div className="flex item-center justify-center h-[calc(100vh-10rem)]">
       <div>
         <form className="bg-zinc-950 p-10" onSubmit={handleSubmite}>
+          <h1 className="text-3xl font-bold my-4">
+            {
+              params.id ? "Update Task" : "Create Task"
+            }
+          </h1>
           <input
             type="text"
             placeholder="title"
@@ -102,7 +107,7 @@ function TaskForm() {
             className="block py-2 px-3 mb-4 w-full text-black"
             onChange={(e) => setCreated_at(e.target.value)}
           />
-          <button>{params.id ? "Update Task" : "Create Task"}</button>
+          <button className="bg-white hover:bg-slate-800 hover:text-white text-slate-800 py-2 px-4 rounded">{params.id ? "Update Task" : "Create Task"}</button>
         </form>
         {params.id && (
           <button
