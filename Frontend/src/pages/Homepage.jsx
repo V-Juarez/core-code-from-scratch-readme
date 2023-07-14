@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import { fetchTasks } from "../api/tasks";
 
-import TaskList from "../components/TaskList"
+import TaskList from "../components/TaskList";
 
 function Homepage() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    async function fetchTasks() {
-      const res = await axios.get("http://localhost:4000/api/task")
-      setTasks(res.data.data)
-    }
     fetchTasks()
-  }, [])
+      .then((res) => {
+        setTasks(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  return <TaskList tasks={tasks} />
+  return <TaskList tasks={tasks} />;
 }
 
-export default Homepage
+export default Homepage;

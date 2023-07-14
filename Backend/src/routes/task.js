@@ -28,11 +28,11 @@ router.get("/", async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { title, description, isdone, created_at } = req.body
+    const { title, description, created_at } = req.body
 
     const data = await run(
-      "INSERT INTO tasks (title, description, isdone, created_at) VALUES (?, ?, ?, ?)", 
-      [title, description, isdone, created_at]
+      "INSERT INTO tasks (title, description, created_at) VALUES (?, ?, ?)", 
+      [title, description, created_at]
     )
 
     if (!data || !data.lastID) {
@@ -45,7 +45,6 @@ router.post('/', async (req, res, next) => {
       id: data.lastID,
       title,
       description,
-      isdone,
       created_at: moment.utc(created_at).format("YYYY-MM-DD")
     };
 
@@ -72,7 +71,7 @@ router.patch('/:id', async (req, res, next) => {
         .json({ message: `el ID no se encuentra en la db`})
     }
 
-    let { title, description, isdone, created_at } = req.body
+    let { title, description, created_at } = req.body
 
     if (typeof description == 'undefined') {
       description = toDo[0].description
@@ -80,21 +79,18 @@ router.patch('/:id', async (req, res, next) => {
     if (typeof title == 'undefined') {
       title = toDo[0].title
     }
-    if (typeof isdone == 'undefined') {
-      isdone = toDo[0].isdone
-    }
     if (typeof created_at == 'undefined') {
       created_at = toDo[0].created_at
     }
 
-    const isDoneNumber = Number(isdone)
-    await run(`UPDATE tasks SET title = ?, description = ?, isdone = ?, created_at = ? WHERE id = ?`, [title, description, isDoneNumber, created_at, id, ])
+    // const isDoneNumber = Number(isdone)
+    await run(`UPDATE tasks SET title = ?, description = ?, created_at = ? WHERE id = ?`, [title, description, created_at, id, ])
 
     const updateTask = {
       id: toDo[0].id,
       title,
       description,
-      isdone: false,
+      // isdone: false,
       created_at: moment(created_at).format("YYYY-MM-DD")
     }
 
