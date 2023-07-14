@@ -109,7 +109,7 @@ router.patch('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', validatorData, async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params
     const toDo = await get("SELECT * FROM tasks WHERE id = ?", [id])
