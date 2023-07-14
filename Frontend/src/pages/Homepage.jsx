@@ -14,12 +14,7 @@ function Homepage() {
     fetchTasks()
   }, [])
 
-  return (
-    <>
-      <h1 className="text-3xl font-bold text-red-300">Homepage</h1>
-      <TaskList tasks={tasks} />
-    </>
-  )
+  return <TaskList tasks={tasks} />
 }
 
 export default Homepage
