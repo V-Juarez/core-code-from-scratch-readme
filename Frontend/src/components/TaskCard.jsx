@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { updateTask } from "../api/tasks";
-import { ImCalendar, ImPencil, ImAlarm, ImClock, ImClock2 } from 'react-icons/im';
+import { ImCalendar, ImClock } from 'react-icons/im';
 // import React from "react";
 
 function TaskCard({ task }) {
@@ -19,7 +19,7 @@ function TaskCard({ task }) {
           onClick={async (e) => {
             e.stopPropagation();
             const res = await updateTask(task.id, {
-              completed: !task.isDone,
+              isdone: !task.isdone,
             });
             if (res.status === 200) {
               window.location.reload()

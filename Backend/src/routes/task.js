@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
         id: toDo.id,
         title: toDo.title,
         description: toDo.description,
-        isDone: Boolean(toDo.isDone),
+        isdone: Boolean(toDo.isdone),
         created_at: moment.utc(toDo.created_at).format("YYYY-MM-DD"),
         created_task: moment.utc(toDo.created_task).format("YYYY-MM-DD HH:MM:SS")
       };
@@ -91,7 +91,6 @@ router.patch('/:id', async (req, res, next) => {
       id: toDo[0].id,
       title,
       description,
-      // isdone: false,
       created_at: moment(created_at).format("YYYY-MM-DD")
     }
 

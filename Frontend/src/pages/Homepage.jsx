@@ -11,8 +11,8 @@ function Homepage() {
   useEffect(() => {
     fetchTasks()
       .then((res) => {
-        setCompletedTasks(res.data.data.filter((task) => task.completed));
-        setPendingTasks(res.data.data.filter((task) => !task.completed));
+        setCompletedTasks(res.data.data.filter((task) => task.isdone));
+        setPendingTasks(res.data.data.filter((task) => !task.isdone));
       })
       .catch((err) => console.log(err));
   }, []);
