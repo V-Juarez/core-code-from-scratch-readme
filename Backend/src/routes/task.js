@@ -16,7 +16,8 @@ router.get("/", async (req, res, next) => {
         title: toDo.title,
         description: toDo.description,
         isDone: Boolean(toDo.isDone),
-        created_at: moment.utc(toDo.created_at).format("YYYY-MM-DD")
+        created_at: moment.utc(toDo.created_at).format("YYYY-MM-DD"),
+        created_task: moment.utc(toDo.created_task).format("YYYY-MM-DD HH:MM:SS")
       };
     });
     res.status(200).json({ message: "To-dos retrieved successfully", data });

@@ -1,3 +1,4 @@
+import { ImPencil } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -9,9 +10,8 @@ function Navbar() {
 
       <Link 
         to="/tasks/new"
-        className="bg-zinc-999 hover:bg-gray-934 text-white font-bold py-2 px-4 rounded"
-      >
-        Create Task</Link>
+        className="bg-zinc-999 hover:bg-gray-934 text-white font-bold py-2 px-4 rounded flex">
+        <ImPencil className="mr-2"/>Create Task</Link>
     </header>
   );
 }

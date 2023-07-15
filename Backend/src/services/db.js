@@ -41,14 +41,12 @@ const initDB = async () => {
       title TEXT, 
       description TEXT, 
       isdone INTEGER DEFAULT 0,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_task DATETIME DEFAULT CURRENT_TIMESTAMP
       )`
     )
     console.log('Tabla tasks Cargadas');
   } catch (error) {
-//  DATETIME DEFAULT (strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime'))
-      // created_at DATE DEFAULT (DATE('now'))
-    // throw new Error(error)
     console.log(error);
   }
 }
