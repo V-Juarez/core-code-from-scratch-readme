@@ -5,7 +5,9 @@ import { fetchTask, createTask, updateTask, deleteTask } from "../api/tasks";
 function TaskForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isdone, setIsDone] = useState();
   const [created_at, setCreated_at] = useState("");
+  const [updated_task, setUpdated_task] = useState("")
 
   const params = useParams();
   const navigate = useNavigate();
@@ -26,7 +28,9 @@ function TaskForm() {
         const res = await updateTask(params.id, {
           title,
           description,
+          isdone: false,
           created_at,
+          updated_task
         });
         console.log(res);
       }
@@ -48,7 +52,9 @@ function TaskForm() {
           console.log(res);
           setTitle(res.data.title);
           setDescription(res.data.description);
+          setIsDone(res.data.isdone);
           setCreated_at(res.data.created_at);
+          setUpdated_task(res.data.updated_task);
         })
         .catch((error) => console.error(error));
     }

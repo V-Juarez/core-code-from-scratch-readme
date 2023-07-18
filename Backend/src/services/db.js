@@ -42,7 +42,8 @@ const initDB = async () => {
       description TEXT, 
       isdone INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      created_task DATETIME DEFAULT CURRENT_TIMESTAMP
+      created_task DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_task DATETIME DEFAULT CURRENT_TIMESTAMP
       )`
     )
     console.log('Tabla tasks Cargadas');

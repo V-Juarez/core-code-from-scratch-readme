@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const URL = 'http://localhost:4000'
-const endpoint = `${URL}/api/task/`
+const endpoint = `${URL}/api/task`
 
 export const fetchTasks = () => axios.get(`${endpoint}`)
 
