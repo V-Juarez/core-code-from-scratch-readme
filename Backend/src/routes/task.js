@@ -20,7 +20,7 @@ router.get("/", async (req, res, next) => {
         created_task: moment
           .utc(toDo.created_task)
           .format("YYYY-MM-DD HH:MM:SS"),
-        update_task: toDo.update_task,
+        updated_task: toDo.updated_task,
       };
     });
     res.status(200).json({ message: "To-dos retrieved successfully", data });
@@ -75,7 +75,7 @@ router.patch("/:id", async (req, res, next) => {
         .json({ message: `el ID no se encuentra en la db` });
     }
 
-    let { title, description, isdone, created_at, updated_task } = req.body;
+    let { title, description, isdone, created_at } = req.body;
 
     if (typeof description == "undefined") {
       description = toDo[0].description;
@@ -94,11 +94,7 @@ router.patch("/:id", async (req, res, next) => {
       created_at = toDo[0].created_at;
     }
 
-    if (typeof updated_task == "undefined") {
-      updated_task = toDo[0].updated_task;
-    }
-
-    // const isDoneNumber = Boolean(toDo[0].isdone)
+    const updated_task = moment().utc().format("YYYY-MM-DD HH:MM:SS");
 
     await run(
       `UPDATE tasks SET title = ?, description = ?, isdone = ?, created_at = ?, updated_task = ? WHERE id = ?`,
@@ -111,7 +107,7 @@ router.patch("/:id", async (req, res, next) => {
       description,
       isdone,
       created_at: moment(created_at).format("YYYY-MM-DD"),
-      update_taskd: moment().format("YYYY-MM-DD")
+      updated_task: moment(updated_task).format("YYYY-MM-DD HH:MM:SS"),
     };
 
     res.status(200).json({

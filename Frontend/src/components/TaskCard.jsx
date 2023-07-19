@@ -7,14 +7,14 @@ function TaskCard({ task }) {
   const navigate = useNavigate()
   const [isDone, setIsDone] = useState(task.isdone)
 
+
   const handleClick = async () => {
-    const newIsDone = !isDone; // Obtener el valor más reciente de isDone
+    const newIsDone = !isDone; 
     const res = await updateTask(task.id, {
       isdone: newIsDone,
     });
     if (res.status === 200) {
-      setIsDone(newIsDone); // Actualizar el estado local
-      // Realizar alguna acción después de la actualización exitosa
+      setIsDone(newIsDone);
     }
       console.log(task)
       console.log(newIsDone)
@@ -33,12 +33,6 @@ function TaskCard({ task }) {
           onClick={async (e) => {
             e.stopPropagation();
             handleClick()
-            // const res = await updateTask(task.id, {
-            //   isdone: !task.isdone,
-            // });
-            // if (res.status === 200) {
-            //   window.location.reload()
-            // }
           }}
           className="flex m-2"
         >
@@ -58,7 +52,7 @@ function TaskCard({ task }) {
       <p className="text-slate-300">{isDone ? 'Completada' : 'Pendiente'}</p>
       <span className="text-slate-200 flex"><ImCalendar className="mr-2"/>{task.created_at}</span>
       <p className="text-slate-500 flex"><ImClock className="mr-2" /> {task.created_task}</p>
-      <p className="text-slate-500 flex"><ImClock className="mr-2" /> {task.updated_task}</p>
+      {/* <p className="text-slate-500 flex"><ImClock className="mr-2" /> {task.updated_task}</p> */}
     </div>
   );
 }
